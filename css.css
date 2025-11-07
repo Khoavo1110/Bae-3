@@ -1,94 +1,211 @@
-/* Replace with your CSS Code 
-  (Leave empty if not needed) */
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: purple;  /* Sửa đúng cú pháp màu */
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  #gifContainerImg {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  #siBtn {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: #009705; /* verde */
-    color: white;
-    border: 2px solid #ffc0cb; /* Bordes rosa */
-    border-radius: 10px; /* Esquinas redondeadas */
-  }
-  
-  #noBtn {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: #ff5733; /* Rojo */
-    color: white;
-    border: 2px solid #ffc0cb; /* Bordes rosa */
-    border-radius: 10px; /* Esquinas redondeadas */
-  }
-  #noBtn span {
-    font-size: 18px;
-    color: #fcf4f4; /* Cambia el color del texto según tus preferencias */
-    /* Otras propiedades de estilo aquí */
-  }
-  
-  #siBtn:hover {
-    background-color:; /* Cambia a otro color en hover, puedes ajustar el valor según tus preferencias */
-  }
-  #noBtn:hover {
-    background-color: #641e0d; /* Cambia a otro color en hover, puedes ajustar el valor según tus preferencias */
-  }
-  .bg-green {
-    background-color: #ffffff; /* Nuevo color de fondo verde */
-  }
-  
-  #messageContainer {
-    font-size: 30px;
-    color: #ff0000;
-    text-shadow: 2px 2px 4px #000;
-    animation: pulse 0.5s infinite alternate;
-  }
-  
-  @keyframes pulse {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.3); /* Zoom más grande */
-    }
-  }
-@media (max-width: 600px) {
-  #messageContainer {
-    font-size: 22px;
-  }
+/* Love letter page styles */
+:root{
+  --paper:#fffdf6;
+  --accent:#ff6b81;
+  --text:#2b2b2b;
+  --bg:#7b2cbf;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg,#3a0ca3 0%, #8338ec 60%, #f72585 100%);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
 
-  h1 {
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.hearts span{position:absolute;bottom:-60px;width:20px;height:20px;background:var(--accent);transform:rotate(45deg);border-radius:3px;opacity:0.9}
+.hearts span:before,.hearts span:after{content:"";position:absolute;width:20px;height:20px;background:var(--accent);border-radius:50%}
+.hearts span:before{top:-10px;left:0}
+.hearts span:after{left:10px;top:0}
+/* different positions/durations */
+.hearts span:nth-child(1){left:5%;animation:float 10s linear infinite;animation-delay:0s}
+.hearts span:nth-child(2){left:18%;width:26px;height:26px;animation:float 12s linear infinite;animation-delay:2s}
+.hearts span:nth-child(3){left:30%;width:18px;height:18px;animation:float 9s linear infinite;animation-delay:1s}
+.hearts span:nth-child(4){left:42%;width:22px;height:22px;animation:float 11s linear infinite;animation-delay:3s}
+.hearts span:nth-child(5){left:55%;width:16px;height:16px;animation:float 8s linear infinite;animation-delay:4s}
+.hearts span:nth-child(6){left:65%;width:24px;height:24px;animation:float 13s linear infinite;animation-delay:1s}
+.hearts span:nth-child(7){left:75%;width:20px;height:20px;animation:float 10s linear infinite;animation-delay:2.5s}
+.hearts span:nth-child(8){left:85%;width:18px;height:18px;animation:float 9.5s linear infinite;animation-delay:0.5s}
+.hearts span:nth-child(9){left:60%;width:20px;height:20px;animation:float 12s linear infinite;animation-delay:6s}
+.hearts span:nth-child(10){left:12%;width:14px;height:14px;animation:float 7.5s linear infinite;animation-delay:5s}
+.hearts span:nth-child(11){left:90%;width:28px;height:28px;animation:float 14s linear infinite;animation-delay:3s}
+.hearts span:nth-child(12){left:48%;width:18px;height:18px;animation:float 10s linear infinite;animation-delay:2s}
+
+@keyframes float{0%{transform:translateY(0) rotate(45deg);opacity:0}10%{opacity:1}100%{transform:translateY(-140vh) rotate(45deg);opacity:0}}
+
+.stage{position:relative;z-index:10;text-align:center;padding:20px;}
+.caption{color:rgba(255,255,255,0.95);margin-top:18px;font-weight:600}
+.controls{margin-top:8px}
+.ghost{background:transparent;border:1px solid rgba(255,255,255,0.5);color:white;padding:8px 12px;border-radius:8px;cursor:pointer}
+
+/* Phong bì và thư styles */
+.envelope {
+    width: 350px;
+    height: 240px;
+    margin: 0 auto 40px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease-in-out;
+}
+
+.envelope-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5e6d3 0%, #fff2e6 50%, #d4c4b7 100%);
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.front:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.1) 10px,
+        rgba(255,255,255,0.1) 20px
+    );
+}
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 0;
+    background: linear-gradient(180deg, #e6d5c3 0%, #f2e6d9 100%);
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.flap:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.05));
+}
+
+.pocket {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 5px 5px;
+    background: linear-gradient(180deg, #f2e6d9 0%, #e6d5c3 100%);
+}
+
+.left-fold, .right-fold {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    background: rgba(0,0,0,0.03);
+    top: 0;
+}
+
+.left-fold {
+    left: 0;
+    transform: skewY(45deg);
+    transform-origin: top;
+}
+
+.right-fold {
+    right: 0;
+    transform: skewY(-45deg);
+    transform-origin: top;
+}
+
+/* Phần thư */
+.letter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: #fff;
+    text-align: left;
+    transition: transform 0.4s ease-in-out;
+    transform: translateY(0);
+    z-index: 1;
+}
+
+.letter-border {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+.letter-title {
     font-size: 24px;
-  }
-}                               
+    color: #ff6b81;
+    margin-bottom: 20px;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+.letter-stamp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b81" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat;
+    opacity: 0.2;
+}
+
+.letter-content {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        #e5e5e5 28px
+    );
+    padding: 3px 0;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+
+/* open state */
+.envelope.open .flap{transform:rotateX(-180deg);transition:transform 700ms cubic-bezier(.2,.9,.2,1)}
+.envelope.open .paper{transform:translateY(-80%)}
+.envelope.open .paper .message{opacity:1;transform:translateY(0)}
+
+@media (max-width:480px){.envelope{height:200px}}
+
                                          
                                          
                                          

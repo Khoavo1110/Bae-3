@@ -1,78 +1,77 @@
-let noButtonState = 0;
+// Hành vi mở phong bì và hiển thị nội dung thư
+const envelope = document.getElementById('envelope');
+const messageEl = document.getElementById('message');
+const resetBtn = document.getElementById('resetBtn');
 
-// Hiện gif ban đầu
-showElement('gifContainer');
+const letterText = `Em yêu thương của anh,
 
-document.getElementById('siBtn').addEventListener('click', handleYesClick);
-document.getElementById('noBtn').addEventListener('click', handleNoClick);
+Trong cuộc sống đầy bộn bề này, chỉ cần nghĩ đến em là anh lại thấy tim mình ấm áp lạ thường. Mỗi khoảnh khắc bên em đều là những kỷ niệm tuyệt vời mà anh luôn trân trọng.
 
-function handleYesClick() {
-    hideAll(['gifContainer', 'sadGifContainer', 'sadGifContainer1', 'sadGifContainer2', 'happyGifContainer2', 'happyGifContainer3', 'happyGifContainer4']); 
-    // Ẩn hết tất cả luôn cho sạch
+Em có biết không, tình yêu của anh dành cho em cũng giống như những trái tim nhỏ bé đang bay lơ lửng trên bức thư này vậy - nhẹ nhàng, chân thành và vô tận.
 
-    showElement('happyGifContainer');
-    hideAll(['question', 'siBtn', 'noBtn']);
-    document.body.classList.add('bg-green');
+Cảm ơn em vì đã xuất hiện trong cuộc đời anh, làm cho thế giới của anh tràn ngập những sắc màu tươi đẹp.
 
-    showElement('messageContainer');
-    document.getElementById('messageContainer').innerHTML = 'anh cũng yêu em';
+Yêu em thật nhiều,
+Anh của em.`;
 
-    const happyGifs = ['happyGifContainer2', 'happyGifContainer3', 'happyGifContainer4'];
+let typingTimer = null;
 
-    happyGifs.forEach((gif, index) => {
-        setTimeout(() => {
-            hideAll(happyGifs.concat(['happyGifContainer']));
-            showElement(gif);
-        }, (index + 1) * 1000);
+function openEnvelope() {
+    if (envelope.classList.contains('open')) return;
+    
+    // Thêm class open để kích hoạt animation
+    envelope.classList.add('open');
+    
+    // Hiệu ứng nhẹ khi mở
+    envelope.style.transform = 'scale(1.02)';
+    setTimeout(() => envelope.style.transform = '', 400);
+    
+    // Animation các trái tim nền
+    document.querySelectorAll('.hearts span').forEach(h => {
+        h.style.opacity = '1';
+        h.style.animation = 'float 12s linear infinite';
+    });
+    
+    // Hiệu ứng gõ chữ với độ trễ để đợi animation phong bì
+    setTimeout(() => {
+        typeText(letterText, messageEl, 40);
+        messageEl.style.opacity = '1';
+    }, 1000);
+}
+
+function closeEnvelope() {
+    envelope.classList.remove('open');
+    
+    // Xóa text và reset opacity
+    if (typingTimer) clearTimeout(typingTimer);
+    messageEl.textContent = '';
+    messageEl.style.opacity = '0';
+    
+    // Reset các animation trái tim
+    document.querySelectorAll('.hearts span').forEach(h => {
+        h.style.opacity = '0.6';
     });
 }
 
-function handleNoClick() {
-    const noTexts = [
-        'Chọn lại đi mà~', 'Chọn kỹ vô nha!', 'Nghĩ kỹ chưa đó?', 'Đừng màaa~',
-        'Bỏ tui lại sao được huhu', 'Là sao nữa trời?', 'Làm lại đi mà~', 'Nữa hả? Bấm nút bên trái kìa!',
-        'Nhấn nút bên trái á nha!', 'Ahhh, không thương anh rồi đúng hông?', 'Không có tình cảm gì luôn hả?',
-        'Có thương anh xíu nào hong?', 'Nghĩ kỹ chưa zợ~', 'NOOO...', 'Nghĩ kỹ lại đi mà~', 'Anh yêu em nhiều lắm á!'
-    ];
-    hideElement('gifContainer');
-    const sadGifs = ['sadGifContainer', 'sadGifContainer2', 'sadGifContainer1'];
-
-    if (noButtonState < noTexts.length) {
-        document.getElementById('noBtn').innerHTML = noTexts[noButtonState];
-        document.getElementById('noBtn').style.backgroundColor = '#F1330A';
-
-        if (noButtonState < 3) {
-            hideAll(sadGifs);
-            showElement(sadGifs[noButtonState]);
-        }
-
-        const siBtn = document.getElementById('siBtn');
-        const size = 40 + (noButtonState * 20);
-        siBtn.style.fontSize = `${size}px`;
-        siBtn.style.padding = `${size / 2}px ${size}px`;
-
-        noButtonState++;
-    } else {
-        handleYesClick();
+function typeText(text, node, speed=40){
+  node.textContent = '';
+  let i=0;
+  function step(){
+    if(i<=text.length){
+      node.textContent = text.slice(0,i);
+      i++;
+      typingTimer = setTimeout(step, speed);
     }
+  }
+  step();
 }
 
-function resetNoButton() {
-    hideAll(['sadGifContainer', 'sadGifContainer1', 'sadGifContainer2', 'happyGifContainer']);
-    showElement('gifContainer');
-    noButtonState = 0;
+envelope.addEventListener('click', openEnvelope);
+envelope.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openEnvelope(); });
+resetBtn.addEventListener('click', ()=>{ closeEnvelope(); setTimeout(()=>{ /* allow re-open */ },200); });
+
+// small accessibility: prefer reduced motion
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.style.setProperty('--reduced-motion', '1');
 }
 
-function showElement(id) {
-    document.getElementById(id).style.display = 'block';
-}
-
-function hideElement(id) {
-    document.getElementById(id).style.display = 'none';
-}
-
-function hideAll(ids) {
-    ids.forEach(id => {
-        hideElement(id);
-    });
-}
