@@ -3,16 +3,13 @@ const envelope = document.getElementById('envelope');
 const messageEl = document.getElementById('message');
 const resetBtn = document.getElementById('resetBtn');
 
-const letterText = `Em yêu thương của anh,
+const letterText = `gửi bé Mi,
 
-Trong cuộc sống đầy bộn bề này, chỉ cần nghĩ đến em là anh lại thấy tim mình ấm áp lạ thường. Mỗi khoảnh khắc bên em đều là những kỷ niệm tuyệt vời mà anh luôn trân trọng.
+cảm ơn em vì đã làm bạn nói chuyện và giữ chuỗi với anh trong khoảng thời gian anh làm việc học tập mệt mỏi thì có em làm bạn nói chuyện anh cảm thấy rất là vui 
+cảm ơn em vì đã đến làm bạn với anhh .
 
-Em có biết không, tình yêu của anh dành cho em cũng giống như những trái tim nhỏ bé đang bay lơ lửng trên bức thư này vậy - nhẹ nhàng, chân thành và vô tận.
-
-Cảm ơn em vì đã xuất hiện trong cuộc đời anh, làm cho thế giới của anh tràn ngập những sắc màu tươi đẹp.
-
-Yêu em thật nhiều,
-Anh của em.`;
+VÕ ĐĂNG KHOA,
+GỬI Bé Mi`;
 
 let typingTimer = null;
 
