@@ -3,13 +3,12 @@ const envelope = document.getElementById('envelope');
 const messageEl = document.getElementById('message');
 const resetBtn = document.getElementById('resetBtn');
 
-const letterText = `gửi bé Mi,
+const letterText = `gửi bé Hiền,
 
-cảm ơn em vì đã làm bạn nói chuyện và giữ chuỗi với anh trong khoảng thời gian anh làm việc học tập mệt mỏi thì có em làm bạn nói chuyện anh cảm thấy rất là vui 
-cảm ơn em vì đã đến làm bạn với anhh .
+anh thích gọi em là Ngọc hơn , hôm nay em học thế nào có vui không , tronng lớp bài tập thế nào có khó hông với lại bị cô la có buồn lắm hk :((( thật may là có em nói chuyện với anh hihih gần moahhhhh
 
 VÕ ĐĂNG KHOA,
-GỬI Bé Mi`;
+GỬI Bé Hiền`;
 
 let typingTimer = null;
 
