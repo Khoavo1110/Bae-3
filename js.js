@@ -3,12 +3,9 @@ const envelope = document.getElementById('envelope');
 const messageEl = document.getElementById('message');
 const resetBtn = document.getElementById('resetBtn');
 
-const letterText = `gửi bé Hiền,
+const letterText = `gửi Khanh,
 
-anh thích gọi em là Ngọc hơn , hôm nay em học thế nào có vui không , tronng lớp bài tập thế nào có khó hông với lại bị cô la có buồn lắm hk :((( thật may là có em nói chuyện với anh hihih gần moahhhhh
-
-VÕ ĐĂNG KHOA,
-GỬI Bé Hiền`;
+hông có gì hết á tạo màu mè cho vui thôi buổi sáng vui vẻ thi đậu nhá :))) `;
 
 let typingTimer = null;
 
