@@ -3,9 +3,9 @@ const envelope = document.getElementById('envelope');
 const messageEl = document.getElementById('message');
 const resetBtn = document.getElementById('resetBtn');
 
-const letterText = `gửi Khanh,
+const letterText = `gửi Linh ,
 
-hông có gì hết á tạo màu mè cho vui thôi buổi sáng vui vẻ thi đậu nhá :))) `;
+nếu bà thấy được tui cũng không quá tệ mình có thể tìm hiểu cho một mối quan hệ nghiêm túc , biết là hơi vọi nếu bà oke thì tim cái này nhóa chúc bà buổi sáng vui vẻ `;
 
 let typingTimer = null;
 
